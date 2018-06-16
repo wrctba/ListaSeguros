@@ -1,0 +1,26 @@
+﻿@model ListaSeguros.Models.Seguro
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<div class="form-group">
+    <label asp-for="TipoPessoa" class="control-label"></label>
+    <select asp-for="TipoPessoa" name="TipoPessoa" asp-items="@Html.GetEnumSelectList<ListaSeguros.Enum.TipoPessoa>()" class="form-control"></select>
+    <span asp-validation-for="TipoSeguro" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="CpfCnpj" class="control-label"></label>
+    <input asp-for="CpfCnpj" type="text" class="form-control" />
+    <span asp-validation-for="CpfCnpj" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="TipoSeguro" class="control-label"></label>
+    <select asp-for="TipoSeguro" asp-items="@Html.GetEnumSelectList<ListaSeguros.Enum.TipoSeguro>()" class="form-control"></select>
+    <span asp-validation-for="TipoSeguro" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label id="LabelObjetoSegurado" class="control-label">Placa</label>
+    <input asp-for="ObjetoSegurado" class="form-control" />
+    <span asp-validation-for="ObjetoSegurado" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <input type="submit" value="Salvar" class="btn btn-default" />
+</div>

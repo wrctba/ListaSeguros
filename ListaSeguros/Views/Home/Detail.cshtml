@@ -1,0 +1,51 @@
+﻿@model ListaSeguros.Models.Seguro
+
+<h2>Detalhes do Seguro @Html.DisplayFor(m => m.Id)</h2>
+<hr />
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CpfCnpj)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CpfCnpj)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoSeguro)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TipoSeguro)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ObjetoSegurado)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ObjetoSegurado)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-info">Editar</a>
+    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#Modal">Excluir</button>
+</div>
+
+<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Atenção</h4>
+            </div>
+            <div class="modal-body">
+                Está certo que deseja excluir o seguro?
+            </div>
+            <div class="modal-footer">
+                <form asp-action="Delete">
+                    <input type="hidden" asp-for="Id" />
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                    <input type="submit" value="Excluir" class="btn btn-danger" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,62 @@
+﻿@model ListaSeguros.Models.Seguro
+
+<h2>Editar Seguro @Html.DisplayFor(m => m.Id)</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <input asp-for="Id" type="hidden" />
+            @Html.Partial("_Fields", Model)
+        </form>
+    </div>
+</div>
+<h5><a asp-action="Index">Home</a></h5>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Mascara de CPF e CNPJ
+            if ($("#TipoPessoa").val() == 2) {
+                $("#CpfCnpj").mask('00.000.000/0000-00', { reverse: true, placeholder: "__.___.___/____-__", selectOnFocus: true });
+            } else {
+                $("#CpfCnpj").mask('000.000.000-00', { reverse: true, placeholder: "___.___.___-__", selectOnFocus: true });
+            }
+            $("#TipoPessoa").on('change', function () {
+                $("#CpfCnpj").val('');
+                if (this.value == 2) {
+                    $("#CpfCnpj").mask('00.000.000/0000-00', { reverse: true, placeholder: "__.___.___/____-__", selectOnFocus: true});
+                } else {
+                    $("#CpfCnpj").mask('000.000.000-00', { reverse: true, placeholder: "___.___.___-__", selectOnFocus: true});
+                }
+            });
+
+            //Objeto Segurado
+            if ($("#TipoSeguro").val() == 3) {
+                $("#LabelObjetoSegurado").html("CPF");
+                $("#ObjetoSegurado").mask('000.000.000-00', { reverse: true, placeholder: "___.___.___-__", selectOnFocus: true });
+            } else if ($("#TipoSeguro").val() == 2) {
+                $("#LabelObjetoSegurado").html("Endereço");
+                $("#ObjetoSegurado").unmask();
+                $("#ObjetoSegurado").removeAttr('PlaceHolder');
+            } else {
+                $("#LabelObjetoSegurado").html("Placa");
+                $("#ObjetoSegurado").mask('AAA-9999', { reverse: true, placeholder: "___-____", selectOnFocus: true });
+            }
+            $("#TipoSeguro").on('change', function () {
+                $("#ObjetoSegurado").val('');
+                if (this.value == 3) {
+                    $("#LabelObjetoSegurado").html("CPF");
+                    $("#ObjetoSegurado").mask('000.000.000-00', { reverse: true, placeholder: "___.___.___-__", selectOnFocus: true });
+                } else if (this.value == 2) {
+                    $("#LabelObjetoSegurado").html("Endereço");
+                    $("#ObjetoSegurado").unmask();
+                    $("#ObjetoSegurado").removeAttr('PlaceHolder');
+                } else {
+                    $("#LabelObjetoSegurado").html("Placa");
+                    $("#ObjetoSegurado").mask('AAA-9999', { reverse: true, placeholder: "___-____", selectOnFocus: true });
+                }
+            });
+        });
+    </script>
+}
